@@ -1,0 +1,288 @@
+ctime,datname,pid,usesysid,usename,application_name,client_addr,client_port,backend_start,xact_start,query_start,waiting,query,state,state_change
+1416614969.04105,dbt3,9127,10,mark,psql,,-1,2014-11-22 01:09:29.039543+01,2014-11-22 01:09:29.040903+01,2014-11-22 01:09:29.040903+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV, HEADER);",active,2014-11-22 01:09:29.040908+01
+1416614969.04105,dbt3,9126,10,mark,psql,,-1,2014-11-22 01:09:29.039526+01,2014-11-22 01:09:29.041051+01,2014-11-22 01:09:29.041051+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",active,2014-11-22 01:09:29.041056+01
+1416614969.04105,dbt3,9129,10,mark,psql,,-1,2014-11-22 01:09:29.039768+01,2014-11-22 01:09:29.041881+01,2014-11-22 01:09:29.041881+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV, HEADER);",active,2014-11-22 01:09:29.041886+01
+1416614969.04105,dbt3,9130,10,mark,psql,,-1,2014-11-22 01:09:29.039859+01,2014-11-22 01:09:29.041854+01,2014-11-22 01:09:29.041854+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV, HEADER);",active,2014-11-22 01:09:29.041859+01
+1416614969.04105,dbt3,9128,10,mark,psql,,-1,2014-11-22 01:09:29.039739+01,2014-11-22 01:09:29.042224+01,2014-11-22 01:09:29.042224+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV, HEADER);",active,2014-11-22 01:09:29.042228+01
+1416615029.04509,dbt3,11317,10,mark,psql,,-1,2014-11-22 01:10:03.965771+01,2014-11-22 01:10:03.967482+01,2014-11-22 01:10:03.967696+01,f,"select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%yellow%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;",active,2014-11-22 01:10:03.967698+01
+1416615029.04509,dbt3,13181,10,mark,psql,,-1,2014-11-22 01:10:29.043235+01,2014-11-22 01:10:29.045085+01,2014-11-22 01:10:29.045085+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:10:29.04509+01
+1416615029.04509,dbt3,13182,10,mark,psql,,-1,2014-11-22 01:10:29.043364+01,2014-11-22 01:10:29.045087+01,2014-11-22 01:10:29.045087+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:10:29.045092+01
+1416615029.04509,dbt3,13183,10,mark,psql,,-1,2014-11-22 01:10:29.043593+01,2014-11-22 01:10:29.045085+01,2014-11-22 01:10:29.045085+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:10:29.045091+01
+1416615029.04509,dbt3,13184,10,mark,psql,,-1,2014-11-22 01:10:29.043862+01,2014-11-22 01:10:29.04612+01,2014-11-22 01:10:29.04612+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:10:29.046125+01
+1416615029.04509,dbt3,13185,10,mark,psql,,-1,2014-11-22 01:10:29.044032+01,2014-11-22 01:10:29.046114+01,2014-11-22 01:10:29.046114+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:10:29.04612+01
+1416615089.04794,dbt3,11317,10,mark,psql,,-1,2014-11-22 01:10:03.965771+01,2014-11-22 01:10:03.967482+01,2014-11-22 01:10:03.967696+01,f,"select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%yellow%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;",active,2014-11-22 01:10:03.967698+01
+1416615089.04794,dbt3,22370,10,mark,psql,,-1,2014-11-22 01:11:29.04488+01,2014-11-22 01:11:29.047803+01,2014-11-22 01:11:29.047803+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:11:29.047808+01
+1416615089.04794,dbt3,22371,10,mark,psql,,-1,2014-11-22 01:11:29.044952+01,2014-11-22 01:11:29.047775+01,2014-11-22 01:11:29.047775+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:11:29.047781+01
+1416615089.04794,dbt3,22372,10,mark,psql,,-1,2014-11-22 01:11:29.045231+01,2014-11-22 01:11:29.047929+01,2014-11-22 01:11:29.047929+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:11:29.047941+01
+1416615089.04794,dbt3,22373,10,mark,psql,,-1,2014-11-22 01:11:29.045296+01,2014-11-22 01:11:29.047936+01,2014-11-22 01:11:29.047936+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:11:29.047947+01
+1416615089.04794,dbt3,22374,10,mark,psql,,-1,2014-11-22 01:11:29.045446+01,2014-11-22 01:11:29.047856+01,2014-11-22 01:11:29.047856+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:11:29.04786+01
+1416615149.0517,dbt3,23248,10,mark,psql,,-1,2014-11-22 01:11:59.960438+01,2014-11-22 01:11:59.963456+01,2014-11-22 01:11:59.963734+01,f,"select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	customer,
+	orders,
+	lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 314
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+LIMIT 100;",active,2014-11-22 01:11:59.963735+01
+1416615149.0517,dbt3,23256,10,mark,psql,,-1,2014-11-22 01:12:29.047502+01,2014-11-22 01:12:29.049301+01,2014-11-22 01:12:29.049301+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:12:29.049306+01
+1416615149.0517,dbt3,23257,10,mark,psql,,-1,2014-11-22 01:12:29.048612+01,2014-11-22 01:12:29.05176+01,2014-11-22 01:12:29.05176+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:12:29.051771+01
+1416615149.0517,dbt3,23258,10,mark,psql,,-1,2014-11-22 01:12:29.048696+01,2014-11-22 01:12:29.051701+01,2014-11-22 01:12:29.051701+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:12:29.051711+01
+1416615149.0517,dbt3,23259,10,mark,psql,,-1,2014-11-22 01:12:29.049037+01,2014-11-22 01:12:29.050717+01,2014-11-22 01:12:29.050717+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:12:29.050722+01
+1416615149.0517,dbt3,23260,10,mark,psql,,-1,2014-11-22 01:12:29.04924+01,2014-11-22 01:12:29.050857+01,2014-11-22 01:12:29.050857+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:12:29.050862+01
+1416615209.05389,dbt3,23285,10,mark,psql,,-1,2014-11-22 01:13:03.220506+01,2014-11-22 01:13:03.223651+01,2014-11-22 01:13:03.223942+01,f,"select
+	s_name,
+	count(*) as numwait
+from
+	supplier,
+	lineitem l1,
+	orders,
+	nation
+where
+	s_suppkey = l1.l_suppkey
+	and o_orderkey = l1.l_orderkey
+	and o_orderstatus = 'F'
+	and l1.l_receiptdate > l1.l_commitdate
+	and exists (
+		select
+			*
+		from
+			lineitem l2
+		where
+			l2.l_orderkey = l1.l_orderkey
+			and l2.l_suppkey <> l1.l_suppkey
+	)
+	and not exists (
+		select
+			*
+		from
+			lineitem l3
+		where
+			l3.l_orderkey = l1.l_orderkey
+			and l3.l_suppkey <> l1.l_suppkey
+			and l3.l_receiptdate > l3.l_commitdate
+	)
+	and s_nationkey = n_nationkey
+	and n_name = 'VIETNAM'
+group by
+	s_name
+order by
+	numwait desc,
+	s_name
+LIMIT 100;",active,2014-11-22 01:13:03.223944+01
+1416615209.05389,dbt3,23293,10,mark,psql,,-1,2014-11-22 01:13:29.049302+01,2014-11-22 01:13:29.051076+01,2014-11-22 01:13:29.051076+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:13:29.051081+01
+1416615209.05389,dbt3,23294,10,mark,psql,,-1,2014-11-22 01:13:29.049418+01,2014-11-22 01:13:29.051092+01,2014-11-22 01:13:29.051092+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:13:29.051097+01
+1416615209.05389,dbt3,23295,10,mark,psql,,-1,2014-11-22 01:13:29.050722+01,2014-11-22 01:13:29.053845+01,2014-11-22 01:13:29.053845+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:13:29.053858+01
+1416615209.05389,dbt3,23296,10,mark,psql,,-1,2014-11-22 01:13:29.050815+01,2014-11-22 01:13:29.053894+01,2014-11-22 01:13:29.053894+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:13:29.053903+01
+1416615209.05389,dbt3,23297,10,mark,psql,,-1,2014-11-22 01:13:29.050926+01,2014-11-22 01:13:29.053914+01,2014-11-22 01:13:29.053914+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:13:29.053923+01
+1416615269.05414,dbt3,23322,10,mark,psql,,-1,2014-11-22 01:14:05.155672+01,2014-11-22 01:14:05.158796+01,2014-11-22 01:14:05.15908+01,f,"select
+	l_orderkey,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	o_orderdate,
+	o_shippriority
+from
+	customer,
+	orders,
+	lineitem
+where
+	c_mktsegment = 'BUILDING'
+	and c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate < date '1995-03-05'
+	and l_shipdate > date '1995-03-05'
+group by
+	l_orderkey,
+	o_orderdate,
+	o_shippriority
+order by
+	revenue desc,
+	o_orderdate
+LIMIT 10;",active,2014-11-22 01:14:05.159081+01
+1416615269.05414,dbt3,23330,10,mark,psql,,-1,2014-11-22 01:14:29.052343+01,2014-11-22 01:14:29.054138+01,2014-11-22 01:14:29.054138+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:14:29.054143+01
+1416615269.05414,dbt3,23331,10,mark,psql,,-1,2014-11-22 01:14:29.052451+01,2014-11-22 01:14:29.05414+01,2014-11-22 01:14:29.05414+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:14:29.054144+01
+1416615329.05901,dbt3,23427,10,mark,psql,,-1,2014-11-22 01:15:19.447824+01,2014-11-22 01:15:19.451061+01,2014-11-22 01:15:19.451446+01,f,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '63 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;",active,2014-11-22 01:15:19.451449+01
+1416615329.05901,dbt3,23435,10,mark,psql,,-1,2014-11-22 01:15:29.054445+01,2014-11-22 01:15:29.05613+01,2014-11-22 01:15:29.05613+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:15:29.056135+01
+1416615329.05901,dbt3,23436,10,mark,psql,,-1,2014-11-22 01:15:29.054626+01,2014-11-22 01:15:29.057623+01,2014-11-22 01:15:29.057623+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:15:29.057632+01
+1416615329.05901,dbt3,23437,10,mark,psql,,-1,2014-11-22 01:15:29.055751+01,2014-11-22 01:15:29.058794+01,2014-11-22 01:15:29.058794+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:15:29.058805+01
+1416615329.05901,dbt3,23439,10,mark,psql,,-1,2014-11-22 01:15:29.056078+01,2014-11-22 01:15:29.057686+01,2014-11-22 01:15:29.057686+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:15:29.057691+01
+1416615329.05901,dbt3,23438,10,mark,psql,,-1,2014-11-22 01:15:29.055906+01,2014-11-22 01:15:29.059009+01,2014-11-22 01:15:29.059009+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:15:29.059019+01
+1416615389.05923,dbt3,23427,10,mark,psql,,-1,2014-11-22 01:15:19.447824+01,2014-11-22 01:15:19.451061+01,2014-11-22 01:15:19.451446+01,f,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '63 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;",active,2014-11-22 01:15:19.451449+01
+1416615389.05923,dbt3,23448,10,mark,psql,,-1,2014-11-22 01:16:29.057411+01,2014-11-22 01:16:29.05922+01,2014-11-22 01:16:29.05922+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:16:29.059225+01
+1416615389.05923,dbt3,23449,10,mark,psql,,-1,2014-11-22 01:16:29.057515+01,2014-11-22 01:16:29.059226+01,2014-11-22 01:16:29.059226+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:16:29.05923+01
+1416615389.05923,dbt3,23450,10,mark,psql,,-1,2014-11-22 01:16:29.058468+01,,,f,"",,
+1416615449.06158,dbt3,23501,10,mark,psql,,-1,2014-11-22 01:17:24.137071+01,2014-11-22 01:17:24.138708+01,2014-11-22 01:17:24.13899+01,f,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'VIETNAM' and n2.n_name = 'INDIA')
+				or (n1.n_name = 'INDIA' and n2.n_name = 'VIETNAM')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",active,2014-11-22 01:17:24.138994+01
+1416615449.06158,dbt3,23510,10,mark,psql,,-1,2014-11-22 01:17:29.059799+01,2014-11-22 01:17:29.061579+01,2014-11-22 01:17:29.061579+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:17:29.061584+01
+1416615449.06158,dbt3,23511,10,mark,psql,,-1,2014-11-22 01:17:29.0599+01,2014-11-22 01:17:29.061553+01,2014-11-22 01:17:29.061553+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:17:29.061559+01
+1416615449.06158,dbt3,23512,10,mark,psql,,-1,2014-11-22 01:17:29.060078+01,2014-11-22 01:17:29.063159+01,2014-11-22 01:17:29.063159+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:17:29.063169+01
+1416615449.06158,dbt3,23513,10,mark,psql,,-1,2014-11-22 01:17:29.060957+01,,,f,"",,
+1416615509.06599,dbt3,23538,10,mark,psql,,-1,2014-11-22 01:18:02.670379+01,2014-11-22 01:18:02.672095+01,2014-11-22 01:18:28.966536+01,f,"DELETE FROM orders
+USING tmp_orderkey2
+WHERE o_orderkey = orderkey;",active,2014-11-22 01:18:28.966542+01
+1416615509.06599,dbt3,23546,10,mark,psql,,-1,2014-11-22 01:18:29.062762+01,2014-11-22 01:18:29.064481+01,2014-11-22 01:18:29.064481+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:18:29.064487+01
+1416615509.06599,dbt3,23547,10,mark,psql,,-1,2014-11-22 01:18:29.062945+01,2014-11-22 01:18:29.065993+01,2014-11-22 01:18:29.065993+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, waiting, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:18:29.066003+01
+1416615509.06599,dbt3,23549,10,mark,psql,,-1,2014-11-22 01:18:29.064072+01,2014-11-22 01:18:29.066967+01,2014-11-22 01:18:29.066967+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:18:29.066975+01
+1416615509.06599,dbt3,23550,10,mark,psql,,-1,2014-11-22 01:18:29.064258+01,2014-11-22 01:18:29.067179+01,2014-11-22 01:18:29.067179+01,f,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2014-11-22 01:18:29.067188+01
